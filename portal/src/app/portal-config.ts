@@ -1,0 +1,1 @@
+export const PORTAL_ACCESS_CODE = '1026';
