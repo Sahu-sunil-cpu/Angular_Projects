@@ -1,0 +1,37 @@
+
+const express = require('express');
+const cors = require('cors');
+require('dotenv').config();
+const userRoutes = require('./routes/userRoutes');
+
+const connectDB = require('./config/db');
+
+const app = express();
+
+app.use(cors({
+    origin: 'http://localhost:4200',
+}));
+
+app.use(express.json());
+
+app.get('/', (req, res) => {
+    res.json({
+        message: 'EmployeeHub Backend is running!',
+    });
+});
+
+app.use('/api/users', userRoutes);
+
+
+const PORT = process.env.PORT || 5000;
+
+const startServer = async () => {
+    await connectDB();
+
+    app.listen(PORT, () => {
+        console.log(`Server running at http://localhost:${PORT}`);
+    });
+};
+
+
+startServer();

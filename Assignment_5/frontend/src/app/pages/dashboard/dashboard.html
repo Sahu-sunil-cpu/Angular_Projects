@@ -1,0 +1,64 @@
+<section class="dashboard-page">
+    <div class="page-heading">
+        <div>
+            <h1>Dashboard</h1>
+            <p>Overview of your organization's employee data.</p>
+        </div>
+        <span class="live-label">Live Database Data</span>
+    </div>
+
+    <div *ngIf="loading" class="message">Loading dashboard...</div>
+
+    <div *ngIf="errorMessage && !loading" class="message error">
+        {{ errorMessage }}
+        <button (click)="loadDashboard()">Retry</button>
+    </div>
+
+    <ng-container *ngIf="!loading && !errorMessage">
+        <div class="stats-grid">
+            <article class="stat-card">
+                <div class="stat-icon">E</div>
+                <p>Total Employees</p>
+                <h2>{{ totalEmployees }}</h2>
+                <span>Employee records in database</span>
+            </article>
+
+            <article class="stat-card">
+                <div class="stat-icon">D</div>
+                <p>Departments</p>
+                <h2>{{ totalDepartments }}</h2>
+                <span>Departments with employees</span>
+            </article>
+
+            <article class="stat-card">
+                <div class="stat-icon">₹</div>
+                <p>Average Salary</p>
+                <h2>{{ averageSalary | currency:'INR':'symbol':'1.0-0' }}</h2>
+                <span>Average across all employees</span>
+            </article>
+        </div>
+
+        <section class="department-section">
+            <h2>Employees by Department</h2>
+            <p class="section-subtitle">Distribution of employee records by department.</p>
+
+            <div *ngIf="departmentStats.length === 0" class="message">
+                No employee records available.
+            </div>
+
+            <div class="department-list">
+                <div class="department-row" *ngFor="let department of departmentStats">
+                    <div class="department-info">
+                        <span>{{ department.name }}</span>
+                        <strong>{{ department.count }}</strong>
+                    </div>
+
+                    <div class="progress-track">
+                        <div class="progress-bar"
+                            [style.width.%]="totalEmployees ? department.count / totalEmployees * 100 : 0"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </ng-container>
+</section>

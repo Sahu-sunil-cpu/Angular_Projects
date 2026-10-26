@@ -1,0 +1,210 @@
+<div class="page-container">
+    <div class="registration-card">
+
+        <div class="form-header">
+            <h1>Create Account</h1>
+            <p>Fill in your details to register</p>
+        </div>
+
+        <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()" novalidate>
+
+            <!-- Name -->
+            <div class="form-group">
+                <label for="name">Full Name</label>
+
+                <input id="name" type="text" formControlName="name" placeholder="Enter your full name" />
+
+                <div class="error" *ngIf="f['name'].touched && f['name'].invalid">
+                    <span *ngIf="f['name'].errors?.['required']">
+                        Name is required.
+                    </span>
+
+                    <span *ngIf="f['name'].errors?.['minlength']">
+                        Name must contain at least 3 characters.
+                    </span>
+
+                    <span *ngIf="f['name'].errors?.['pattern']">
+                        Name can contain only letters and spaces.
+                    </span>
+                </div>
+            </div>
+
+            <!-- Email -->
+            <div class="form-group">
+                <label for="email">Email Address</label>
+
+                <input id="email" type="email" formControlName="email" placeholder="Enter your email" />
+
+                <div class="error" *ngIf="f['email'].touched && f['email'].invalid">
+                    <span *ngIf="f['email'].errors?.['required']">
+                        Email is required.
+                    </span>
+
+                    <span *ngIf="f['email'].errors?.['email']">
+                        Please enter a valid email address.
+                    </span>
+                </div>
+            </div>
+
+            <!-- Mobile -->
+            <div class="form-group">
+                <label for="mobile">Mobile Number</label>
+
+                <input id="mobile" type="tel" formControlName="mobile" maxlength="10"
+                    placeholder="Enter 10-digit mobile number" />
+
+                <div class="error" *ngIf="f['mobile'].touched && f['mobile'].invalid">
+                    <span *ngIf="f['mobile'].errors?.['required']">
+                        Mobile number is required.
+                    </span>
+
+                    <span *ngIf="f['mobile'].errors?.['pattern']">
+                        Enter a valid 10-digit Indian mobile number.
+                    </span>
+                </div>
+            </div>
+
+            <!-- Gender -->
+            <div class="form-group">
+                <label>Gender</label>
+
+                <div class="gender-options">
+                    <label>
+                        <input type="radio" formControlName="gender" value="Male" />
+                        Male
+                    </label>
+
+                    <label>
+                        <input type="radio" formControlName="gender" value="Female" />
+                        Female
+                    </label>
+
+                    <label>
+                        <input type="radio" formControlName="gender" value="Other" />
+                        Other
+                    </label>
+                </div>
+
+                <div class="error" *ngIf="f['gender'].touched && f['gender'].invalid">
+                    Please select your gender.
+                </div>
+            </div>
+
+            <!-- Password -->
+            <div class="form-group">
+                <label for="password">Password</label>
+
+                <input id="password" type="password" formControlName="password"
+                    placeholder="Create a strong password" />
+
+                <div class="error" *ngIf="f['password'].touched && f['password'].invalid">
+                    <span *ngIf="f['password'].errors?.['required']">
+                        Password is required.
+                    </span>
+
+                    <span *ngIf="f['password'].errors?.['minlength']">
+                        Password must contain at least 8 characters.
+                    </span>
+
+                    <span *ngIf="f['password'].errors?.['pattern']">
+                        Include uppercase, lowercase, number and special character.
+                    </span>
+                </div>
+            </div>
+
+            <!-- Confirm Password -->
+            <div class="form-group">
+                <label for="confirmPassword">Confirm Password</label>
+
+                <input id="confirmPassword" type="password" formControlName="confirmPassword"
+                    placeholder="Re-enter your password" />
+
+                <div class="error" *ngIf="
+            f['confirmPassword'].touched &&
+            f['confirmPassword'].invalid
+          ">
+                    <span *ngIf="f['confirmPassword'].errors?.['required']">
+                        Please confirm your password.
+                    </span>
+                </div>
+
+                <div class="error" *ngIf="
+            f['confirmPassword'].touched &&
+            f['confirmPassword'].value &&
+            registrationForm.errors?.['passwordMismatch']
+          ">
+                    Passwords do not match.
+                </div>
+            </div>
+
+            <!-- Country -->
+            <div class="form-group">
+                <label for="country">Country</label>
+
+                <select id="country" formControlName="country" (change)="onCountryChange()">
+                    <option value="">Select Country</option>
+
+                    <option *ngFor="let country of countries" [value]="country">
+                        {{ country }}
+                    </option>
+                </select>
+
+                <div class="error" *ngIf="f['country'].touched && f['country'].invalid">
+                    Please select a country.
+                </div>
+            </div>
+
+            <!-- State -->
+            <div class="form-group">
+                <label for="state">State</label>
+
+                <select id="state" formControlName="state" (change)="onStateChange()">
+                    <option value="">Select State</option>
+
+                    <option *ngFor="let state of availableStates" [value]="state">
+                        {{ state }}
+                    </option>
+                </select>
+
+                <div class="error" *ngIf="
+            f['state'].enabled &&
+            f['state'].touched &&
+            f['state'].invalid
+          ">
+                    Please select a state.
+                </div>
+            </div>
+
+            <!-- City -->
+            <div class="form-group">
+                <label for="city">City</label>
+
+                <select id="city" formControlName="city">
+                    <option value="">Select City</option>
+
+                    <option *ngFor="let city of availableCities" [value]="city">
+                        {{ city }}
+                    </option>
+                </select>
+
+                <div class="error" *ngIf="
+            f['city'].enabled &&
+            f['city'].touched &&
+            f['city'].invalid
+          ">
+                    Please select a city.
+                </div>
+            </div>
+
+            <!-- Submit -->
+            <button type="submit">
+                Register
+            </button>
+
+            <p class="form-footer">
+                Please check all details before submitting.
+            </p>
+
+        </form>
+    </div>
+</div>

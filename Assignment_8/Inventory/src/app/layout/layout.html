@@ -1,0 +1,68 @@
+<div class="app-layout">
+    <aside class="sidebar" [class.sidebar-closed]="!sidebarOpen">
+        <div class="sidebar-header">
+            <h2 *ngIf="sidebarOpen">Inventory<span>Hub</span></h2>
+
+            <button type="button" class="sidebar-toggle" (click)="toggleSidebar()"
+                [attr.aria-label]="sidebarOpen ? 'Close sidebar' : 'Open sidebar'">
+                {{ sidebarOpen ? '✕' : '☰' }}
+            </button>
+        </div>
+
+        <div class="sidebar-user" *ngIf="sidebarOpen">
+            <div class="user-avatar">A</div>
+            <div>
+                <strong>Administrator</strong>
+                <small>Admin Account</small>
+            </div>
+        </div>
+
+        <nav class="sidebar-nav">
+            <a routerLink="/dashboard" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"
+                [title]="sidebarOpen ? '' : 'Dashboard'">
+                <span class="nav-icon">⌂</span>
+                <span *ngIf="sidebarOpen">Dashboard</span>
+            </a>
+
+            <a routerLink="/products" routerLinkActive="active" [title]="sidebarOpen ? '' : 'Products'">
+                <span class="nav-icon">▣</span>
+                <span *ngIf="sidebarOpen">Products</span>
+            </a>
+
+            <a routerLink="/categories" routerLinkActive="active" [title]="sidebarOpen ? '' : 'Categories'">
+                <span class="nav-icon">▤</span>
+                <span *ngIf="sidebarOpen">Categories</span>
+            </a>
+
+            <a routerLink="/orders" routerLinkActive="active" [title]="sidebarOpen ? '' : 'Orders'">
+                <span class="nav-icon">▧</span>
+                <span *ngIf="sidebarOpen">Orders</span>
+            </a>
+        </nav>
+
+        <div class="sidebar-footer">
+            <button type="button" class="logout-button" (click)="logout()">
+                <span class="nav-icon">⇥</span>
+                <span *ngIf="sidebarOpen">Logout</span>
+            </button>
+        </div>
+    </aside>
+
+    <main class="main-content" [class.content-expanded]="!sidebarOpen">
+        <header class="topbar">
+            <div>
+                <h1>Inventory Management</h1>
+                <p>Manage your stock and orders efficiently.</p>
+            </div>
+
+            <div class="topbar-user">
+                <span class="user-avatar">A</span>
+                <span *ngIf="sidebarOpen">Admin</span>
+            </div>
+        </header>
+
+        <section class="page-content">
+            <router-outlet></router-outlet>
+        </section>
+    </main>
+</div>

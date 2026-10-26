@@ -1,0 +1,84 @@
+
+<div class="create-page">
+  <header class="page-header">
+    <div>
+      <p class="eyebrow">SUPPORT CENTER / TICKETS</p>
+      <h1>Create Ticket</h1>
+      <p class="subtitle">Submit a new support request.</p>
+    </div>
+
+    <a routerLink="/" class="back-button">← Back to Dashboard</a>
+  </header>
+
+  <form class="form-card" [formGroup]="ticketForm" (ngSubmit)="submitTicket()">
+    <div class="form-heading">
+      <div>
+        <h2>Ticket Information</h2>
+        <p>Fields marked with * are required.</p>
+      </div>
+      <span class="form-icon">＋</span>
+    </div>
+
+    @if (error()) {
+      <div class="error-message">{{ error() }}</div>
+    }
+
+    <div class="form-group">
+      <label for="title">Ticket Title *</label>
+      <input
+        id="title"
+        type="text"
+        formControlName="title"
+        placeholder="e.g. Unable to log in"
+      />
+
+      @if (ticketForm.controls.title.touched && ticketForm.controls.title.invalid) {
+        <small class="field-error">Please enter a ticket title.</small>
+      }
+    </div>
+
+    <div class="form-group">
+      <label for="description">Description</label>
+      <textarea
+        id="description"
+        rows="5"
+        formControlName="description"
+        placeholder="Describe the issue..."
+      ></textarea>
+    </div>
+
+    <div class="form-grid">
+      <div class="form-group">
+        <label for="status">Status *</label>
+        <select id="status" formControlName="status">
+          <option value="Open">Open</option>
+          <option value="In Progress">In Progress</option>
+          <option value="Pending">Pending</option>
+          <option value="Closed">Closed</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="priority">Priority *</label>
+        <select id="priority" formControlName="priority">
+          <option value="Low">Low</option>
+          <option value="Medium">Medium</option>
+          <option value="High">High</option>
+          <option value="Critical">Critical</option>
+        </select>
+      </div>
+    </div>
+
+    <footer class="form-actions">
+      <a routerLink="/" class="cancel-button">Cancel</a>
+
+      <button
+        type="submit"
+        class="submit-button"
+        [disabled]="saving()"
+      >
+        {{ saving() ? 'Creating...' : 'Create Ticket' }}
+      </button>
+    </footer>
+  </form>
+</div>

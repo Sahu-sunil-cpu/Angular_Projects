@@ -1,0 +1,167 @@
+<div class="users-page">
+    <header class="page-header">
+        <div>
+            <h1>Users</h1>
+            <p class="subtitle">
+                Manage your users, contact details and accounts.
+            </p>
+        </div>
+
+        <button class="btn btn-primary" (click)="openAddForm()">
+            <span>+</span> Add User
+        </button>
+    </header>
+
+    <div class="stats-card">
+        <div class="stat-icon">U</div>
+        <div>
+            <p>Total Users</p>
+            <h2>{{ users.length }}</h2>
+        </div>
+    </div>
+
+    <div class="alert alert-error" *ngIf="errorMessage">
+        <span>{{ errorMessage }}</span>
+        <button *ngIf="!showForm" class="text-button" (click)="loadUsers()">
+            Retry
+        </button>
+    </div>
+
+    <div class="alert alert-success" *ngIf="successMessage">
+        {{ successMessage }}
+    </div>
+
+    <section class="form-card" *ngIf="showForm">
+        <div class="form-heading">
+            <div>
+                <h2>{{ isEditing ? 'Edit User' : 'Add New User' }}</h2>
+                <p>Enter the user's details below.</p>
+            </div>
+            <button type="button" class="close-button" (click)="cancelForm()" aria-label="Close form">×</button>
+        </div>
+
+        <form #userForm="ngForm" (ngSubmit)="saveUser()">
+            <div class="form-grid">
+                <div class="form-group">
+                    <label for="name">Full Name *</label>
+                    <input id="name" name="name" [(ngModel)]="formUser.name" required minlength="2"
+                        placeholder="Enter full name" />
+                </div>
+
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input id="username" name="username" [(ngModel)]="formUser.username" placeholder="Enter username" />
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email Address *</label>
+                    <input id="email" name="email" type="email" [(ngModel)]="formUser.email" required email
+                        placeholder="name@example.com" />
+                </div>
+
+                <div class="form-group">
+                    <label for="phone">Phone Number</label>
+                    <input id="phone" name="phone" [(ngModel)]="formUser.phone" placeholder="Enter phone number" />
+                </div>
+
+                <div class="form-group">
+                    <label for="website">Website</label>
+                    <input id="website" name="website" [(ngModel)]="formUser.website" placeholder="example.com" />
+                </div>
+
+                <div class="form-group">
+                    <label for="company">Company</label>
+                    <input id="company" name="company" [(ngModel)]="formUser.company!.name"
+                        placeholder="Company name" />
+                </div>
+            </div>
+
+            <div class="form-actions">
+                <button type="button" class="btn btn-secondary" (click)="cancelForm()">
+                    Cancel
+                </button>
+
+                <button type="submit" class="btn btn-primary" [disabled]="userForm.invalid || isSaving">
+                    {{
+                    isSaving
+                    ? 'Saving...'
+                    : (isEditing ? 'Save Changes' : 'Create User')
+                    }}
+                </button>
+            </div>
+        </form>
+    </section>
+
+    <section class="table-card">
+        <div class="table-heading">
+            <div>
+                <h2>All Users</h2>
+                <p>A list of users fetched from the API.</p>
+            </div>
+            <button class="btn btn-secondary" (click)="loadUsers()" [disabled]="isLoading">
+                Refresh
+            </button>
+        </div>
+
+        <div class="loading-state" *ngIf="isLoading">
+            <div class="spinner"></div>
+            <p>Loading users...</p>
+        </div>
+
+        <div class="empty-state" *ngIf="!isLoading && !errorMessage && users.length === 0">
+            <h3>No users found</h3>
+            <p>Add a new user to get started.</p>
+        </div>
+
+        <div class="table-wrapper" *ngIf="!isLoading && users.length > 0">
+            <table>
+                <thead>
+                    <tr>
+                        <th>User</th>
+                        <th>Username</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                        <th>Company</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr *ngFor="let user of users">
+                        <td>
+                            <div class="user-cell">
+                                <div class="avatar">
+                                    {{ user.name.charAt(0).toUpperCase() }}
+                                </div>
+                                <div>
+                                    <strong>{{ user.name }}</strong>
+                                    <small>#{{ user.id }}</small>
+                                </div>
+                            </div>
+                        </td>
+
+                        <td>{{ user.username || '—' }}</td>
+                        <td>{{ user.email }}</td>
+                        <td>{{ user.phone || '—' }}</td>
+                        <td>{{ user.company?.name || '—' }}</td>
+
+                        <td>
+                            <div class="action-buttons">
+                                <button class="btn-edit" (click)="editUser(user)" aria-label="Edit user">
+                                    Edit
+                                </button>
+                                <button class="btn-delete" (click)="deleteUser(user)" aria-label="Delete user">
+                                    Delete
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="table-footer" *ngIf="!isLoading && users.length > 0">
+            Showing {{ users.length }} users
+        </div>
+    </section>
+</div>

@@ -1,0 +1,115 @@
+
+<div class="ticket-page">
+  <header class="page-header">
+    <div>
+      <p class="eyebrow">SUPPORT CENTER / TICKETS</p>
+      <h1>Ticket Details</h1>
+      <p class="subtitle">View the information and current status of your ticket.</p>
+    </div>
+
+    <a routerLink="/" class="back-button">
+      <span>←</span> Back to Dashboard
+    </a>
+  </header>
+
+  @if (loading()) {
+    <section class="state-card">
+      <div class="loader"></div>
+      <p>Loading ticket details...</p>
+    </section>
+  } @else if (error()) {
+    <section class="state-card error-card">
+      <div class="state-icon">!</div>
+      <h2>Unable to load ticket</h2>
+      <p>{{ error() }}</p>
+      <a routerLink="/" class="primary-button">Back to Dashboard</a>
+    </section>
+  } @else if (ticket(); as t) {
+    <section class="ticket-card">
+      <div class="ticket-top">
+        <div>
+          <div class="ticket-reference">
+            <span class="ticket-dot"></span>
+            {{ t.ticketId }}
+          </div>
+
+          <h2>{{ t.title }}</h2>
+          <p class="ticket-created">
+            Created {{ t.createdAt | date:'dd MMM yyyy, h:mm a' }}
+          </p>
+        </div>
+
+        <span
+          class="status-badge"
+          [class.status-open]="t.status.toLowerCase() === 'open'"
+          [class.status-progress]="t.status.toLowerCase() === 'in progress'"
+          [class.status-pending]="t.status.toLowerCase() === 'pending'"
+          [class.status-closed]="t.status.toLowerCase() === 'closed'"
+        >
+          <span class="badge-dot"></span>
+          {{ t.status }}
+        </span>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="details-grid">
+        <div class="detail-item">
+          <span class="detail-label">Ticket ID</span>
+          <span class="detail-value">{{ t.ticketId }}</span>
+        </div>
+
+        <div class="detail-item">
+          <span class="detail-label">Priority</span>
+          <span
+            class="priority-badge"
+            [class.priority-critical]="t.priority.toLowerCase() === 'critical'"
+            [class.priority-high]="t.priority.toLowerCase() === 'high'"
+            [class.priority-medium]="t.priority.toLowerCase() === 'medium'"
+            [class.priority-low]="t.priority.toLowerCase() === 'low'"
+          >
+            {{ t.priority }}
+          </span>
+        </div>
+
+        <div class="detail-item">
+          <span class="detail-label">Created At</span>
+          <span class="detail-value">
+            {{ t.createdAt | date:'dd MMM yyyy, h:mm a' }}
+          </span>
+        </div>
+
+        <div class="detail-item">
+          <span class="detail-label">Last Updated</span>
+          <span class="detail-value">
+            {{ t.updatedAt | date:'dd MMM yyyy, h:mm a' }}
+          </span>
+        </div>
+      </div>
+
+      <div class="divider"></div>
+
+      <section class="description-section">
+        <h3>
+          <span class="description-icon">≡</span>
+          Description
+        </h3>
+
+        <p class="description-text">
+          {{ t.description || 'No description provided for this ticket.' }}
+        </p>
+      </section>
+
+      <footer class="ticket-footer">
+        <span class="footer-indicator"></span>
+        Ticket information
+      </footer>
+    </section>
+  } @else {
+    <section class="state-card">
+      <h2>Ticket not found</h2>
+      <p>No ticket details are available.</p>
+      <a routerLink="/" class="primary-button">Back to Dashboard</a>
+    </section>
+  }
+</div>

@@ -1,0 +1,38 @@
+.about h1 {
+    font-size: 28px;
+    color: #1e293b;
+    margin-bottom: 8px;
+}
+
+.subtitle {
+    color: #64748b;
+    margin-bottom: 28px;
+}
+
+.about-card {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 28px;
+    max-width: 850px;
+}
+
+.about-card h2 {
+    color: #2563eb;
+    margin-bottom: 16px;
+}
+
+.about-card h3 {
+    color: #1e293b;
+    margin: 24px 0 10px;
+}
+
+.about-card p,
+.about-card li {
+    color: #64748b;
+    line-height: 1.8;
+}
+
+.about-card ul {
+    padding-left: 22px;
+}

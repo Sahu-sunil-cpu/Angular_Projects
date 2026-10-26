@@ -1,0 +1,45 @@
+<aside class="sidebar">
+    <a routerLink="/dashboard" class="brand">
+        <span class="brand-icon">E</span>
+        <span>
+            <strong>EmployeeHub</strong>
+            <small>Management System</small>
+        </span>
+    </a>
+
+    <div class="nav-heading">MAIN MENU</div>
+
+    <nav class="nav-links">
+        <a routerLink="/dashboard" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+            <span class="nav-icon">▦</span>
+            Dashboard
+        </a>
+
+        <a routerLink="/employees" routerLinkActive="active">
+            <span class="nav-icon">♙</span>
+            Employees
+        </a>
+
+        <a routerLink="/departments" routerLinkActive="active">
+            <span class="nav-icon">▤</span>
+            Departments
+        </a>
+
+        <a routerLink="/about" routerLinkActive="active">
+            <span class="nav-icon">ⓘ</span>
+            About
+        </a>
+    </nav>
+
+    <div class="sidebar-bottom">
+        <div class="sidebar-footer">
+            <span class="footer-dot"></span>
+            <span>System Online</span>
+        </div>
+
+        <a routerLink="/login" routerLinkActive="active" class="login-link">
+            <span class="nav-icon">⇥</span>
+            Login
+        </a>
+    </div>
+</aside>

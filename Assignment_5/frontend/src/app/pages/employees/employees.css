@@ -1,0 +1,224 @@
+.employees-page {
+    padding: 30px;
+    color: #172b4d;
+}
+
+.page-heading,
+.results-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+}
+
+.page-heading h1 {
+    margin: 0 0 8px;
+    font-size: 28px;
+}
+
+.page-heading p {
+    margin: 0;
+    color: #718096;
+}
+
+.total-card {
+    min-width: 150px;
+    padding: 15px 20px;
+    background: #edf4ff;
+    border: 1px solid #d8e6ff;
+    border-radius: 12px;
+}
+
+.total-card span,
+.total-card strong {
+    display: block;
+}
+
+.total-card span {
+    color: #536784;
+    font-size: 13px;
+}
+
+.total-card strong {
+    margin-top: 5px;
+    color: #2563eb;
+    font-size: 25px;
+}
+
+.filter-panel {
+    display: flex;
+    align-items: end;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin: 28px 0;
+    padding: 22px;
+    background: #fff;
+    border: 1px solid #e5eaf2;
+    border-radius: 14px;
+    box-shadow: 0 4px 18px rgba(30, 60, 100, 0.04);
+}
+
+.filter-field {
+    flex: 1;
+    min-width: 170px;
+}
+
+.filter-field label {
+    display: block;
+    margin-bottom: 8px;
+    color: #42526e;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.filter-field input,
+.filter-field select {
+    box-sizing: border-box;
+    width: 100%;
+    height: 42px;
+    padding: 0 12px;
+    background: #fff;
+    border: 1px solid #dce3ed;
+    border-radius: 8px;
+    color: #253858;
+    font: inherit;
+    outline: none;
+}
+
+.filter-field input:focus,
+.filter-field select:focus {
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.12);
+}
+
+.reset-btn,
+.error-message button {
+    height: 42px;
+    padding: 0 18px;
+    background: #2563eb;
+    border: none;
+    border-radius: 8px;
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.results-heading {
+    margin-bottom: 16px;
+}
+
+.results-heading h2 {
+    margin: 0;
+    font-size: 19px;
+}
+
+.results-heading span {
+    color: #718096;
+    font-size: 13px;
+}
+
+.table-container {
+    overflow-x: auto;
+    background: white;
+    border: 1px solid #e5eaf2;
+    border-radius: 12px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+}
+
+thead {
+    background: #f5f8fc;
+}
+
+th {
+    padding: 15px 18px;
+    color: #60718a;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+}
+
+td {
+    padding: 16px 18px;
+    border-top: 1px solid #edf0f5;
+    font-size: 14px;
+}
+
+.employee-name {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.avatar {
+    display: grid;
+    width: 36px;
+    height: 36px;
+    flex-shrink: 0;
+    place-items: center;
+    border-radius: 10px;
+    background: #e8f0ff;
+    color: #2563eb;
+    font-weight: 700;
+}
+
+.department-tag {
+    display: inline-block;
+    padding: 6px 10px;
+    border-radius: 20px;
+    background: #f0f5ff;
+    color: #315ca8;
+    font-size: 12px;
+}
+
+.salary {
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.status-badge {
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 20px;
+    background: #e7f8ee;
+    color: #16804a;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.message,
+.empty-state {
+    padding: 30px;
+    text-align: center;
+    color: #718096;
+}
+
+.error-message {
+    color: #b42318;
+}
+
+@media (max-width: 700px) {
+    .employees-page {
+        padding: 18px;
+    }
+
+    .page-heading {
+        align-items: flex-start;
+    }
+
+    .total-card {
+        min-width: 100px;
+    }
+
+    .filter-panel {
+        padding: 16px;
+    }
+
+    .filter-field {
+        flex-basis: 100%;
+    }
+}

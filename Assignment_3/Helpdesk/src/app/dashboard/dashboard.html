@@ -1,0 +1,167 @@
+
+<div class="dashboard">
+
+  <!-- Header -->
+  <header class="dashboard-header">
+    <div>
+      <p class="eyebrow">SUPPORT CENTER</p>
+      <h1>My Tickets</h1>
+      <p class="subtitle">Manage and track all your support requests.</p>
+    </div>
+
+    <button
+      class="create-btn"
+      type="button"
+      (click)="createTicket()"
+    >
+      <span class="plus">+</span>
+      Create Ticket
+    </button>
+  </header>
+
+  <!-- Summary cards -->
+  @if (!loading() && !error()) {
+    <section class="stats-grid">
+      <div class="stat-card">
+        <span class="stat-label">Total Tickets</span>
+        <strong class="stat-number">{{ tickets().length }}</strong>
+        <span class="stat-icon total-icon">▤</span>
+      </div>
+
+      <div class="stat-card">
+        <span class="stat-label">Open</span>
+        <strong class="stat-number">
+          {{ tickets().filter(t => t.status.toLowerCase() === 'open').length }}
+        </strong>
+        <span class="stat-icon open-icon">●</span>
+      </div>
+
+      <div class="stat-card">
+        <span class="stat-label">In Progress</span>
+        <strong class="stat-number">
+          {{ tickets().filter(t => t.status.toLowerCase() === 'in progress').length }}
+        </strong>
+        <span class="stat-icon progress-icon">◷</span>
+      </div>
+
+      <div class="stat-card">
+        <span class="stat-label">Closed</span>
+        <strong class="stat-number">
+          {{ tickets().filter(t => t.status.toLowerCase() === 'closed').length }}
+        </strong>
+        <span class="stat-icon closed-icon">✓</span>
+      </div>
+    </section>
+  }
+
+  <!-- Ticket list -->
+  <section class="tickets-section">
+    <div class="section-heading">
+      <div>
+        <h2>All Tickets</h2>
+        <p>Your recent support requests</p>
+      </div>
+      <span class="ticket-count">{{ tickets().length }} tickets</span>
+    </div>
+
+    @if (loading()) {
+      <div class="state-message">
+        <div class="loader"></div>
+        <p>Loading your tickets...</p>
+      </div>
+    } @else if (error()) {
+      <div class="state-message error-state">
+        <p>{{ error() }}</p>
+        <button class="secondary-btn" type="button" (click)="loadTickets()">
+          Try Again
+        </button>
+      </div>
+    } @else if (tickets().length === 0) {
+      <div class="state-message">
+        <div class="empty-icon">▤</div>
+        <h3>No tickets yet</h3>
+        <p>Create your first ticket to get started.</p>
+        <button class="create-btn" type="button" (click)="createTicket()">
+          + Create Ticket
+        </button>
+      </div>
+    } @else {
+      <div class="ticket-list">
+        @for (ticket of tickets(); track ticket._id) {
+          <article class="ticket-card">
+
+            <div class="ticket-main">
+              <div class="ticket-symbol">#</div>
+
+              <div class="ticket-details">
+                <h3>{{ ticket.title }}</h3>
+                <div class="ticket-meta">
+                  <span>{{ ticket.ticketId }}</span>
+                  <span class="meta-dot">•</span>
+                  <span>{{ ticket.createdAt | date:'dd MMM yyyy' }}</span>
+                </div>
+                <p class="ticket-description">
+                  {{ ticket.description }}
+                </p>
+              </div>
+            </div>
+
+            <div class="ticket-labels">
+              <span
+                class="status-badge"
+                [class.status-open]="ticket.status.toLowerCase() === 'open'"
+                [class.status-progress]="ticket.status.toLowerCase() === 'in progress'"
+                [class.status-pending]="ticket.status.toLowerCase() === 'pending'"
+                [class.status-closed]="ticket.status.toLowerCase() === 'closed'"
+              >
+                <span class="badge-dot"></span>
+                {{ ticket.status }}
+              </span>
+
+              <span
+                class="priority-badge"
+                [class.priority-critical]="ticket.priority.toLowerCase() === 'critical'"
+                [class.priority-high]="ticket.priority.toLowerCase() === 'high'"
+                [class.priority-medium]="ticket.priority.toLowerCase() === 'medium'"
+                [class.priority-low]="ticket.priority.toLowerCase() === 'low'"
+              >
+                {{ ticket.priority }}
+              </span>
+            </div>
+
+            <div class="ticket-actions">
+              <button
+                class="action-btn view-btn"
+                type="button"
+                title="View ticket"
+                (click)="viewTicket(ticket)"
+              >
+                View
+              </button>
+
+              <button
+                class="action-btn"
+                type="button"
+                title="Edit ticket"
+                (click)="editTicket(ticket)"
+              >
+                Edit
+              </button>
+
+              <button
+                class="action-btn delete-btn"
+                type="button"
+                title="Delete ticket"
+                (click)="deleteTicket(ticket)"
+              >
+                Del
+              </button>
+            </div>
+
+          </article>
+        }
+      </div>
+    }
+  </section>
+
+</div>

@@ -1,0 +1,83 @@
+
+<div class="edit-page">
+  <header class="page-header">
+    <div>
+      <p class="eyebrow">SUPPORT CENTER / TICKETS</p>
+      <h1>Edit Ticket</h1>
+      <p class="subtitle">Update the ticket details and save your changes.</p>
+    </div>
+
+    <a routerLink="/" class="back-button">← Back to Dashboard</a>
+  </header>
+
+  @if (loading()) {
+    <section class="edit-card state-message">
+      <p>Loading ticket details...</p>
+    </section>
+  } @else if (error() && ticketForm.pristine) {
+    <section class="edit-card state-message">
+      <p class="error-message">{{ error() }}</p>
+      <a routerLink="/" class="primary-button">Back to Dashboard</a>
+    </section>
+  } @else {
+    <form class="edit-card" [formGroup]="ticketForm" (ngSubmit)="saveChanges()">
+      <div class="form-heading">
+        <div>
+          <h2>Ticket Information</h2>
+          <p>Fields marked with * are required.</p>
+        </div>
+        <span class="edit-icon">✎</span>
+      </div>
+
+      @if (error()) {
+        <p class="error-message">{{ error() }}</p>
+      }
+
+      <div class="form-group">
+        <label for="title">Ticket Title *</label>
+        <input id="title" type="text" formControlName="title"
+          placeholder="Enter ticket title" />
+
+        @if (ticketForm.controls.title.touched && ticketForm.controls.title.invalid) {
+          <small class="field-error">Title is required.</small>
+        }
+      </div>
+
+      <div class="form-group">
+        <label for="description">Description</label>
+        <textarea id="description" rows="5" formControlName="description"
+          placeholder="Describe the issue..."></textarea>
+      </div>
+
+      <div class="form-grid">
+        <div class="form-group">
+          <label for="status">Status *</label>
+          <select id="status" formControlName="status">
+            <option value="Open">Open</option>
+            <option value="In Progress">In Progress</option>
+            <option value="Pending">Pending</option>
+            <option value="Closed">Closed</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="priority">Priority *</label>
+          <select id="priority" formControlName="priority">
+            <option value="Low">Low</option>
+            <option value="Medium">Medium</option>
+            <option value="High">High</option>
+            <option value="Critical">Critical</option>
+          </select>
+        </div>
+      </div>
+
+      <footer class="form-actions">
+        <a routerLink="/" class="cancel-button">Cancel</a>
+        <button type="submit" class="primary-button"
+          [disabled]="saving()">
+          {{ saving() ? 'Saving...' : 'Save Changes' }}
+        </button>
+      </footer>
+    </form>
+  }
+</div>

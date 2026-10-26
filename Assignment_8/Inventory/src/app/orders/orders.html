@@ -1,0 +1,109 @@
+<div class="orders-page">
+    <h1>Orders</h1>
+    <p class="subtitle">Create and manage customer orders.</p>
+
+    <div class="order-form">
+        <h2>Create New Order</h2>
+
+        <form (ngSubmit)="createOrder()">
+            <div class="form-grid">
+                <div class="form-group">
+                    <label for="customerName">Customer Name *</label>
+                    <input id="customerName" type="text" name="customerName" [(ngModel)]="customerName"
+                        placeholder="Enter customer name" required />
+                </div>
+
+                <div class="form-group">
+                    <label for="product">Product *</label>
+                    <select id="product" name="product" [(ngModel)]="selectedProductId" required>
+                        <option value="">Select product</option>
+                        <option *ngFor="let product of products" [value]="product._id" [disabled]="product.stock < 1">
+                            {{ product.name }} — ₹{{ product.price }}
+                            (Stock: {{ product.stock }})
+                        </option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="quantity">Quantity *</label>
+                    <input id="quantity" type="number" name="quantity" [(ngModel)]="quantity" min="1" step="1"
+                        required />
+                </div>
+
+                <div class="form-group total-field">
+                    <label>Order Total</label>
+                    <p>{{ orderTotal | currency:'INR':'symbol':'1.2-2' }}</p>
+                </div>
+            </div>
+
+            <p *ngIf="products.length === 0" class="notice">
+                No products available. Add products before creating an order.
+            </p>
+
+            <p *ngIf="selectedProduct && quantity > selectedProduct.stock" class="error-message">
+                Only {{ selectedProduct.stock }} units are available.
+            </p>
+
+            <button type="submit" [disabled]="products.length === 0">
+                Create Order
+            </button>
+        </form>
+    </div>
+
+    <div class="order-list">
+        <h2>Order List ({{ orders.length }})</h2>
+
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Customer</th>
+                        <th>Products</th>
+                        <th>Total</th>
+                        <th>Order Date</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr *ngFor="let order of orders">
+                        <td>{{ order.customerName }}</td>
+
+                        <td>
+                            <div *ngFor="let item of order.items">
+                                {{ item.productName }} × {{ item.quantity }}
+                            </div>
+                        </td>
+
+                        <td>{{ order.total | currency:'INR':'symbol':'1.2-2' }}</td>
+
+                        <td>{{ order.createdAt | date:'mediumDate' }}</td>
+
+                        <td>
+                            <select [ngModel]="order.status" [ngModelOptions]="{ standalone: true }"
+                                (ngModelChange)="updateStatus(order, $event)" aria-label="Update order status">
+                                <option value="Pending">Pending</option>
+                                <option value="Processing">Processing</option>
+                                <option value="Completed">Completed</option>
+                                <option value="Cancelled">Cancelled</option>
+                            </select>
+                        </td>
+
+                        <td>
+                            <button type="button" class="delete-button" (click)="deleteOrder(order.id)">
+                                Delete
+                            </button>
+                        </td>
+                    </tr>
+
+                    <tr *ngIf="orders.length === 0">
+                        <td colspan="6" class="empty-message">
+                            No orders found. Create your first order above.
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

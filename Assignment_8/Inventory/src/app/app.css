@@ -1,0 +1,54 @@
+@import 'ngx-toastr/toastr';
+
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    margin: 0;
+    min-height: 100%;
+    font-family: Arial, Helvetica, sans-serif;
+    background: #f3f6fb;
+    color: #1e293b;
+}
+
+body {
+    min-height: 100vh;
+}
+
+button,
+input,
+select,
+textarea {
+    font-family: inherit;
+}
+
+button {
+    font-size: 14px;
+}
+
+input,
+select,
+textarea {
+    font-size: 14px;
+}
+
+h1,
+h2,
+h3,
+p {
+    overflow-wrap: break-word;
+}
+
+img {
+    max-width: 100%;
+}
+
+@media (max-width: 600px) {
+    #toast-container {
+        width: calc(100% - 30px);
+        left: 15px;
+        right: 15px;
+    }
+}

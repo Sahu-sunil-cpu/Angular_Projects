@@ -1,0 +1,162 @@
+.dashboard-page {
+    padding: 30px;
+    color: #172b4d;
+}
+
+.page-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 28px;
+}
+
+.page-heading h1 {
+    margin: 0 0 8px;
+    font-size: 28px;
+}
+
+.page-heading p,
+.section-subtitle {
+    margin: 0;
+    color: #718096;
+}
+
+.live-label {
+    padding: 8px 12px;
+    background: #e7f8ee;
+    border-radius: 20px;
+    color: #16804a;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 20px;
+}
+
+.stat-card {
+    padding: 24px;
+    background: #fff;
+    border: 1px solid #e5eaf2;
+    border-radius: 14px;
+    box-shadow: 0 4px 18px rgba(30, 60, 100, 0.04);
+}
+
+.stat-icon {
+    display: grid;
+    width: 42px;
+    height: 42px;
+    place-items: center;
+    border-radius: 12px;
+    background: #e8f0ff;
+    color: #2563eb;
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.stat-card p {
+    margin: 18px 0 8px;
+    color: #60718a;
+    font-size: 14px;
+}
+
+.stat-card h2 {
+    margin: 0 0 10px;
+    color: #172b4d;
+    font-size: 27px;
+    overflow-wrap: anywhere;
+}
+
+.stat-card>span {
+    color: #8995a8;
+    font-size: 12px;
+}
+
+.department-section {
+    margin-top: 28px;
+    padding: 24px;
+    background: #fff;
+    border: 1px solid #e5eaf2;
+    border-radius: 14px;
+}
+
+.department-section h2 {
+    margin: 0 0 8px;
+    font-size: 19px;
+}
+
+.section-subtitle {
+    font-size: 13px;
+}
+
+.department-list {
+    display: grid;
+    gap: 22px;
+    margin-top: 28px;
+}
+
+.department-info {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 10px;
+    font-size: 14px;
+}
+
+.department-info strong {
+    color: #2563eb;
+}
+
+.progress-track {
+    height: 8px;
+    overflow: hidden;
+    background: #edf1f7;
+    border-radius: 10px;
+}
+
+.progress-bar {
+    height: 100%;
+    background: #3b82f6;
+    border-radius: 10px;
+    transition: width 0.3s ease;
+}
+
+.message {
+    padding: 24px;
+    color: #718096;
+    text-align: center;
+}
+
+.error {
+    color: #b42318;
+}
+
+.error button {
+    margin-left: 10px;
+    padding: 8px 12px;
+    border: 0;
+    border-radius: 6px;
+    background: #2563eb;
+    color: white;
+    cursor: pointer;
+}
+
+@media (max-width: 850px) {
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 600px) {
+    .dashboard-page {
+        padding: 18px;
+    }
+
+    .page-heading {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+}

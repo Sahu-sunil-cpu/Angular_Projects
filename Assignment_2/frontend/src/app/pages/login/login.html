@@ -1,0 +1,29 @@
+<div class="login-page">
+    <div class="login-card">
+        <h1>Welcome Back</h1>
+        <p class="subtitle">Login to EmployeeHub</p>
+
+        <form #loginForm="ngForm" (ngSubmit)="onLogin(loginForm)">
+
+            <label for="email">Email Address</label>
+            <input id="email" type="email" name="email" placeholder="Enter your email" ngModel required email
+                #email="ngModel" />
+
+            <small class="error" *ngIf="email.invalid && email.touched">
+                Please enter a valid email address.
+            </small>
+
+            <label for="password">Password</label>
+            <input id="password" type="password" name="password" placeholder="Enter your password" ngModel required
+                minlength="6" #password="ngModel" />
+
+            <small class="error" *ngIf="password.invalid && password.touched">
+                Password must contain at least 6 characters.
+            </small>
+
+            <button type="submit" routerLink="/dashboard">Login</button>
+
+            <p class="message" *ngIf="message">{{ message }}</p>
+        </form>
+    </div>
+</div>

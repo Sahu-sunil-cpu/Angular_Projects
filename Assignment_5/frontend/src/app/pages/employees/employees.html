@@ -1,0 +1,101 @@
+<section class="employees-page">
+    <div class="page-heading">
+        <div>
+            <h1>Employees</h1>
+            <p>Search, filter and manage employee records.</p>
+        </div>
+
+        <div class="total-card">
+            <span>Total Employees</span>
+            <strong>{{ count }}</strong>
+        </div>
+    </div>
+
+    <div class="filter-panel">
+        <div class="filter-field search-field">
+            <label for="employee-search">Search employees</label>
+            <input id="employee-search" type="text" placeholder="Search by name..." [(ngModel)]="searchText"
+                (ngModelChange)="loadEmployees()" />
+        </div>
+
+        <div class="filter-field">
+            <label for="department-filter">Department</label>
+            <select id="department-filter" [(ngModel)]="selectedDepartment" (ngModelChange)="loadEmployees()">
+                <option value="All">All Departments</option>
+                <option *ngFor="let department of departments" [value]="department">
+                    {{ department }}
+                </option>
+            </select>
+        </div>
+
+        <div class="filter-field">
+            <label for="salary-sort">Sort by salary</label>
+            <select id="salary-sort" [(ngModel)]="sortOrder" (ngModelChange)="loadEmployees()">
+                <option value="">Default Order</option>
+                <option value="asc">Low to High</option>
+                <option value="desc">High to Low</option>
+            </select>
+        </div>
+
+        <button class="reset-btn" (click)="resetFilters()">
+            Reset
+        </button>
+    </div>
+
+    <div class="results-heading">
+        <h2>Employee Directory</h2>
+        <span>{{ count }} records found</span>
+    </div>
+
+    <div *ngIf="loading" class="message">
+        Loading employees...
+    </div>
+
+    <div *ngIf="errorMessage && !loading" class="message error-message">
+        <p>{{ errorMessage }}</p>
+        <button (click)="loadEmployees()">Retry</button>
+    </div>
+
+    <div class="table-container" *ngIf="!loading && !errorMessage">
+        <table>
+            <thead>
+                <tr>
+                    <th>Employee</th>
+                    <th>Department</th>
+                    <th>Salary</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr *ngFor="let employee of employees">
+                    <td>
+                        <div class="employee-name">
+                            <div class="avatar">
+                                {{ employee.name.charAt(0).toUpperCase() }}
+                            </div>
+                            <strong>{{ employee.name }}</strong>
+                        </div>
+                    </td>
+                    <td>
+                        <span class="department-tag">
+                            {{ employee.department }}
+                        </span>
+                    </td>
+                    <td class="salary">
+                        {{ employee.salary | currency:'INR':'symbol':'1.0-0' }}
+                    </td>
+                    <td>
+                        <span class="status-badge">Active</span>
+                    </td>
+                </tr>
+
+                <tr *ngIf="employees.length === 0">
+                    <td colspan="4" class="empty-state">
+                        No employees match your filters.
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</section>

@@ -1,0 +1,148 @@
+.sidebar {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    width: 250px;
+    min-width: 250px;
+    min-height: 100vh;
+    padding: 25px 16px;
+    background: #fff;
+    border-right: 1px solid #e5eaf2;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 5px 8px 30px;
+    color: #172b4d;
+    text-decoration: none;
+}
+
+.brand-icon {
+    display: grid;
+    width: 42px;
+    height: 42px;
+    flex-shrink: 0;
+    place-items: center;
+    border-radius: 12px;
+    background: #2563eb;
+    color: white;
+    font-size: 23px;
+    font-weight: 800;
+}
+
+.brand strong,
+.brand small {
+    display: block;
+}
+
+.brand strong {
+    font-size: 17px;
+}
+
+.brand small {
+    margin-top: 4px;
+    color: #8995a8;
+    font-size: 11px;
+}
+
+.nav-heading {
+    padding: 0 12px;
+    margin-bottom: 12px;
+    color: #8995a8;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.nav-links {
+    display: grid;
+    gap: 6px;
+}
+
+.nav-links a,
+.login-link {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px;
+    border-radius: 9px;
+    color: #536784;
+    font-size: 14px;
+    text-decoration: none;
+    transition: background 0.2s, color 0.2s;
+}
+
+.nav-links a:hover,
+.login-link:hover {
+    background: #f3f6fb;
+    color: #2563eb;
+}
+
+.nav-links a.active,
+.login-link.active {
+    background: #eaf1ff;
+    color: #2563eb;
+    font-weight: 600;
+}
+
+.nav-icon {
+    display: inline-grid;
+    width: 22px;
+    place-items: center;
+    font-size: 19px;
+}
+
+.sidebar-bottom {
+    margin-top: auto;
+}
+
+.sidebar-footer {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    margin: 20px 4px 12px;
+    padding: 14px 10px;
+    border-top: 1px solid #edf0f5;
+    color: #718096;
+    font-size: 12px;
+}
+
+.footer-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #22c55e;
+}
+
+@media (max-width: 700px) {
+    .sidebar {
+        width: 100%;
+        min-width: 0;
+        min-height: auto;
+        padding: 14px;
+        border-right: 0;
+        border-bottom: 1px solid #e5eaf2;
+    }
+
+    .brand {
+        padding-bottom: 15px;
+    }
+
+    .nav-heading,
+    .sidebar-bottom {
+        display: none;
+    }
+
+    .nav-links {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .nav-links a {
+        gap: 6px;
+        padding: 9px;
+        font-size: 12px;
+    }
+}

@@ -1,0 +1,39 @@
+<div class="dashboard">
+    <h1>Dashboard</h1>
+    <p class="subtitle">Overview of your inventory management system.</p>
+
+    <div class="stats-container">
+        <div class="stat-card">
+            <h3>Total Products</h3>
+            <p class="stat-value">{{ totalProducts }}</p>
+        </div>
+
+        <div class="stat-card">
+            <h3>Total Categories</h3>
+            <p class="stat-value">{{ totalCategories }}</p>
+        </div>
+
+        <div class="stat-card">
+            <h3>Total Orders</h3>
+            <p class="stat-value">{{ totalOrders }}</p>
+        </div>
+
+        <div class="stat-card">
+            <h3>Low Stock Products</h3>
+            <p class="stat-value">{{ lowStockProducts }}</p>
+        </div>
+
+        <div class="stat-card">
+            <h3>Total Inventory Value</h3>
+            <p class="stat-value">
+                {{ totalInventoryValue | currency:'INR':'symbol':'1.2-2' }}
+            </p>
+        </div>
+    </div>
+
+    <div class="inventory-info">
+        <h2>Inventory Summary</h2>
+        <p>Manage your products, categories, and orders from the sidebar.</p>
+        <p>Products with fewer than 10 units are considered low stock.</p>
+    </div>
+</div>

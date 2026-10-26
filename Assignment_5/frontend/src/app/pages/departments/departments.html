@@ -1,0 +1,37 @@
+<section class="departments-page">
+    <div class="page-heading">
+        <div>
+            <h1>Departments</h1>
+            <p class="subtitle">Explore departments across your organization.</p>
+        </div>
+        <div class="department-total">
+            <span>Departments</span>
+            <strong>{{ departments.length }}</strong>
+        </div>
+    </div>
+
+    <div *ngIf="loading" class="message">
+        Loading departments...
+    </div>
+
+    <div *ngIf="errorMessage && !loading" class="message error">
+        {{ errorMessage }}
+        <button (click)="loadDepartmentCounts()">Retry</button>
+    </div>
+
+    <div class="department-grid" *ngIf="!loading && !errorMessage">
+        <article class="department-card" *ngFor="let department of departments">
+            <div class="department-icon">
+                {{ department.name.charAt(0) }}
+            </div>
+
+            <h2>{{ department.name }}</h2>
+            <p>{{ department.description }}</p>
+
+            <div class="department-footer">
+                <span>Employees</span>
+                <strong>{{ department.employeeCount }}</strong>
+            </div>
+        </article>
+    </div>
+</section>
