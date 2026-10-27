@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 async function connectDB() {
     try {
         const connection = await mongoose.connect(
-            process.env.MONGODB_URI
+            process.env.MONGODB_URI || 'mongodb+srv://sunilsahu21633:fFgKmo01YteyZsf4@secondbrain.alydi.mongodb.net/'
         );
 
         console.log(`MongoDB connected: ${connection.connection.host}`);

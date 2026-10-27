@@ -12,7 +12,7 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 
 app.use(cors({
-    origin: process.env.CLIENT_URL || 'http://localhost:4200'
+    origin: process.env.CLIENT_URL || 'https://angular-projects-two.vercel.app/cart'
 }));
 
 app.use(express.json());
@@ -41,9 +41,6 @@ app.use((error, req, res, next) => {
 });
 
 async function startServer() {
-    if (!process.env.MONGODB_URI) {
-        throw new Error('MONGODB_URI is missing from the .env file.');
-    }
 
     await connectDB();
     await seedProducts();
