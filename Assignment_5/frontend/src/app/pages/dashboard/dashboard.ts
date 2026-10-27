@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Employee, EmployeeService } from '../../services/employee';
 
@@ -13,7 +13,7 @@ export class Dashboard implements OnInit {
   loading = false;
   errorMessage = '';
 
-  constructor(private employeeService: EmployeeService) { }
+  constructor(private employeeService: EmployeeService, private cdr: ChangeDetectorRef) { }
 
   ngOnInit(): void {
     this.loadDashboard();
