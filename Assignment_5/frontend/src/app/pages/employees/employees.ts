@@ -48,14 +48,16 @@ export class Employees implements OnInit {
           this.employees = response.employees;
           this.count = response.count;
           this.loading = false;
+          this.cdr.detectChanges()
         },
         error: () => {
           this.errorMessage =
             'Could not load employees. Please check the backend server.';
           this.loading = false;
+          this.cdr.detectChanges()
         }
 
-         this.cdr.detectChanges();
+
       });
 
   }

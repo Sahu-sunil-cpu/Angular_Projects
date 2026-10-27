@@ -71,13 +71,15 @@ export class Departments implements OnInit {
         }));
 
         this.loading = false;
+        this.cdr.detectChanges()
       },
       error: () => {
         this.errorMessage = 'Unable to load department information.';
         this.loading = false;
+        this.cdr.detectChanges()
       }
 
-       this.cdr.detectChanges();
+
     });
 
   }

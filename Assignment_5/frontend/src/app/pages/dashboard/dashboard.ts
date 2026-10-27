@@ -27,13 +27,14 @@ export class Dashboard implements OnInit {
       next: (response) => {
         this.employees = response.employees;
         this.loading = false;
+        this.cdr.detectChanges()
       },
       error: () => {
         this.errorMessage = 'Unable to load dashboard data.';
         this.loading = false;
+        this.cdr.detectChanges();
       }
 
-       this.cdr.detectChanges();
     });
 
 
