@@ -20,7 +20,7 @@ export interface EmployeeResponse {
   providedIn: 'root',
 })
 export class EmployeeService {
-  private apiUrl = 'http://localhost:5000/api/employees';
+  private apiUrl = 'https://assignmrnt5.onrender.com/api/employees';
 
   constructor(private http: HttpClient) { }
 

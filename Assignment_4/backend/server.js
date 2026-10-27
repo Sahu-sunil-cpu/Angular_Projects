@@ -8,9 +8,16 @@ const connectDB = require('./config/db');
 
 const app = express();
 
+// app.use(cors({
+//     origin: process.env.CLIENT_URL || ''
+// }));
+
 app.use(cors({
-    origin: process.env.CLIENT_URL || 'https://angular-projects-kgam.vercel.app/users'
+    origin: 'https://angular-projects-kgam.vercel.app/users',
+    methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization']
 }));
+
 
 app.use(express.json());
 

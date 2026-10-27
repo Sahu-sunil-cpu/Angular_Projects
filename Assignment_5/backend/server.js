@@ -7,7 +7,9 @@ require('dotenv').config();
 const app = express();
 
 app.use(cors({
-    origin: process.env.CLIENT_URL || 'https://angular-projects-mrt1.vercel.app/dashboard'
+    origin: 'https://angular-projects-mrt1.vercel.app/dashboard',
+    methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization']
 }));
 
 app.use(express.json());

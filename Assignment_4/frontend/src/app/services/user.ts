@@ -23,7 +23,7 @@ export interface User {
   providedIn: 'root',
 })
 export class UserService {
-  private readonly apiUrl = 'http://localhost:5000/api/users';
+  private readonly apiUrl = 'https://assignment-4-we7j.onrender.com/api/users';
 
   private readonly http = inject(HttpClient);
 
