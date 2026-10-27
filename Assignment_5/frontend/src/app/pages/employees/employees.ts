@@ -54,6 +54,8 @@ export class Employees implements OnInit {
             'Could not load employees. Please check the backend server.';
           this.loading = false;
         }
+
+         this.cdr.detectChanges();
       });
 
   }

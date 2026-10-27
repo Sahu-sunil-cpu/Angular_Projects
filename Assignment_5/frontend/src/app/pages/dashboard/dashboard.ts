@@ -32,7 +32,11 @@ export class Dashboard implements OnInit {
         this.errorMessage = 'Unable to load dashboard data.';
         this.loading = false;
       }
+
+       this.cdr.detectChanges();
     });
+
+
 
   }
 
