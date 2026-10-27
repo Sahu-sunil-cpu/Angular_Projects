@@ -5,6 +5,7 @@
 
     <p class="eyebrow">PRACTICAL WORKS PORTAL</p>
     <h1>Welcome back</h1>
+
     <p class="description">
       Enter your access code to explore the practical assignments.
     </p>
@@ -19,7 +20,9 @@
       <p class="error-message">{{ error }}</p>
       }
 
-      <button type="submit">Verify and continue →</button>
+      <button type="submit">
+        Verify and continue →
+      </button>
     </form>
 
     <p class="footer-note">Authorized access only</p>
@@ -29,22 +32,28 @@
 <main class="dashboard">
   <header class="topbar">
     <a class="brand" href="/">SKS<span>.</span></a>
-    <button class="logout-button" (click)="logout()">Lock portal</button>
+
+    <button class="logout-button" (click)="logout()">
+      Lock portal
+    </button>
   </header>
 
   <section class="welcome-section">
-    <p class="eyebrow">ANGULAR DEVELOPMENT • PRACTICALS</p>
+    <p class="eyebrow">ANGULAR DEVELOPMENT · PRACTICALS</p>
+
     <h1>Sunil Kumar Sahu's Practical Works</h1>
+
     <p>
-      A central place to explore assignments, applications, and practical
-      implementations.
+      A central place to explore assignments, applications,
+      and practical implementations.
     </p>
 
     <div class="stats">
       <div class="stat-card">
         <strong>{{ assignments.length }}</strong>
-        <span>Assignments listed</span>
+        <span>Assignments</span>
       </div>
+
       <div class="stat-card">
         <strong>Angular</strong>
         <span>Primary technology</span>
@@ -58,7 +67,10 @@
         <p class="eyebrow">YOUR LEARNING JOURNEY</p>
         <h2>Practical assignments</h2>
       </div>
-      <span class="count">{{ assignments.length }} projects</span>
+
+      <span class="count">
+        {{ assignments.length }} projects
+      </span>
     </div>
 
     <div class="assignment-grid">
@@ -68,17 +80,19 @@
           <span class="assignment-number">
             {{ assignment.number.toString().padStart(2, '0') }}
           </span>
-          <span class="category">{{ assignment.category }}</span>
+
+          <span class="category">
+            {{ assignment.category }}
+          </span>
         </div>
 
         <h3>{{ assignment.name }}</h3>
-        <p>
-          Explore the implementation and features of this practical
-          assignment.
-        </p>
 
-        <a [href]="assignment.path">
-          Open assignment <span>→</span>
+        <p>{{ assignment.description }}</p>
+
+        <a [href]="assignment.url" target="_blank" rel="noopener noreferrer">
+          Open assignment
+          <span>↗</span>
         </a>
       </article>
       }
