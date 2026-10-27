@@ -7,14 +7,14 @@ require('dotenv').config();
 const app = express();
 
 app.use(cors({
-    origin: process.env.CLIENT_URL || 'http://localhost:4200'
+    origin: process.env.CLIENT_URL || 'https://angular-projects-mrt1.vercel.app/dashboard'
 }));
 
 app.use(express.json());
 
 app.use('/api/employees', require('./routes/employeeRoutes'));
 
-mongoose.connect(process.env.MONGODB_URI)
+mongoose.connect('mongodb+srv://sunilsahu21633:fFgKmo01YteyZsf4@secondbrain.alydi.mongodb.net/')
     .then(() => {
         console.log('Mongodb connected successfully');
         app.listen(process.env.PORT || 5000, () => {

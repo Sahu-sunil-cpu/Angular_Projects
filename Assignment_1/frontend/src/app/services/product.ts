@@ -14,7 +14,7 @@ import {
 export class ProductService {
   private http = inject(HttpClient);
 
-  private readonly apiUrl = 'http://localhost:5000/api/products';
+  private readonly apiUrl = 'https://assignmet-1.onrender.com/api/products/';
 
   getProducts(): Observable<Product[]> {  // use Observeable<Product[]>, since HttpClient returns RxJS observables
     return this.http

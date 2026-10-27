@@ -17,7 +17,7 @@ const employees = [
 
 async function seedDatabase() {
     try {
-        await mongoose.connect(process.env.MONGODB_URI);
+        await mongoose.connect('mongodb+srv://sunilsahu21633:fFgKmo01YteyZsf4@secondbrain.alydi.mongodb.net/');
 
         // Remove existing records to avoid duplicates
         await Employee.deleteMany({});

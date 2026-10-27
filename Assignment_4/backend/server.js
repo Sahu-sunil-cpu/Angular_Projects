@@ -9,7 +9,7 @@ const connectDB = require('./config/db');
 const app = express();
 
 app.use(cors({
-    origin: process.env.CLIENT_URL || 'http://localhost:4200'
+    origin: process.env.CLIENT_URL || 'https://angular-projects-kgam.vercel.app/users'
 }));
 
 app.use(express.json());

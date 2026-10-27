@@ -4,15 +4,32 @@ const Product = require('../models/Product');
 // GET /api/products
 async function getProducts(req, res, next) {
     try {
-        const category = 'All'
+        const { category, search, sort } = req.query;
+
         const filter = {};
 
-        filter.category = category;
+        if (category && category !== 'All') {
+            filter.category = category;
+        }
 
-
-
+        if (search) {
+            filter.name = {
+                $regex: search,
+                $options: 'i'
+            };
+        }
 
         let query = Product.find(filter);
+
+        if (sort === 'price-asc') {
+            query = query.sort({ price: 1 });
+        } else if (sort === 'price-desc') {
+            query = query.sort({ price: -1 });
+        } else if (sort === 'newest') {
+            query = query.sort({ createdAt: -1 });
+        } else {
+            query = query.sort({ featured: -1, createdAt: -1 });
+        }
 
         const products = await query;
 
